@@ -30,10 +30,10 @@ project(tritonthirdparty LANGUAGES C CXX)
 #
 # ExternalProject Dependencies
 #
-# For each ExternalProject dependency we use PATCH_COMMAND to copy the
+# For each ExternalProject dependency we use # PATCH_COMMAND to copy the
 # project source into TRITON_THIRD_PARTY_SRC_INSTALL_PREFIX. If
 # TRITON_THIRD_PARTY_SRC_INSTALL_PREFIX is not set then source will
-# not be installed. Note that PATCH_COMMAND is executed after the
+# not be installed. Note that # PATCH_COMMAND is executed after the
 # source is downloaded/updated and is not defined by default so it
 # allows a good point to perform the source install.
 #
@@ -91,7 +91,7 @@ ExternalProject_Add(curl
     -DHTTP_ONLY:BOOL=ON
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/curl
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
 
 #
@@ -107,7 +107,7 @@ ExternalProject_Add(grpc-repo
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
   TEST_COMMAND ""
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG} --dest-basename=grpc_1.48.0
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG} --dest-basename=grpc_1.48.0
 )
 
 #
@@ -126,14 +126,14 @@ ExternalProject_Add(nlohmann-json
     -DBUILD_SHARED_LIBS:STRING=yes
     -DBUILD_TESTING:BOOL=OFF
     -H. -Bcmake-out
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG} --dest-basename=nlohmann-json
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG} --dest-basename=nlohmann-json
 )
 
 #
 # Build protobuf project from grpc-repo, but apply a patch that is available
 # in 3.20.0, to resolve a linking issue on Windows
 #
-# Source is from grpc-repo so don't need PATCH_COMMAND to install
+# Source is from grpc-repo so don't need # PATCH_COMMAND to install
 # source for this target.
 #
 # Use -DCMAKE_BUILD_TYPE:STRING=RELEASE to workaround the protobuf build issue
@@ -158,14 +158,14 @@ ExternalProject_Add(protobuf
     -DBUILD_SHARED_LIBS:STRING=no
     -DCMAKE_INSTALL_LIBDIR:STRING=lib
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/protobuf
-  PATCH_COMMAND git cherry-pick -n f180289c4670ca1afde5865bb8a7f2b61a3efcc5
+  # PATCH_COMMAND git cherry-pick -n f180289c4670ca1afde5865bb8a7f2b61a3efcc5
   DEPENDS grpc-repo
 )
 
 #
 # Build absl (abseil) project from grpc-repo
 #
-# Source is from grpc-repo so don't need PATCH_COMMAND to install
+# Source is from grpc-repo so don't need # PATCH_COMMAND to install
 # source for this target.
 #
 ExternalProject_Add(absl
@@ -184,7 +184,7 @@ ExternalProject_Add(absl
 #
 # Build googletest project from grpc-repo
 #
-# Source is from grpc-repo so don't need PATCH_COMMAND to install
+# Source is from grpc-repo so don't need # PATCH_COMMAND to install
 # source for this target.
 #
 ExternalProject_Add(googletest
@@ -211,7 +211,7 @@ endif()
 #
 # Build c-ares project from grpc-repo
 #
-# Source is from grpc-repo so don't need PATCH_COMMAND to install
+# Source is from grpc-repo so don't need # PATCH_COMMAND to install
 # source for this target.
 #
 ExternalProject_Add(c-ares
@@ -233,7 +233,7 @@ ExternalProject_Add(c-ares
 #
 # Build GRPC
 #
-# Source is from grpc-repo so don't need PATCH_COMMAND to install
+# Source is from grpc-repo so don't need # PATCH_COMMAND to install
 # source for this target.
 #
 ExternalProject_Add(grpc
@@ -274,7 +274,7 @@ ExternalProject_Add(libevent
     -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/libevent
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
 
 #
@@ -299,7 +299,7 @@ ExternalProject_Add(libevhtp
     -DCMAKE_PREFIX_PATH:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/libevent
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/libevhtp
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
   DEPENDS libevent
 )
 else()
@@ -319,7 +319,7 @@ ExternalProject_Add(libevhtp
     -DLibevent_DIR:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/libevent/lib/cmake/libevent
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/libevhtp
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
   DEPENDS libevent
 )
 endif()
@@ -347,7 +347,7 @@ ExternalProject_Add(prometheus-cpp
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_LIBDIR:STRING=lib
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/prometheus-cpp
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
 
 #
@@ -372,7 +372,7 @@ ExternalProject_Add(crc32c
     -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/crc32c
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
 
 # This is necessary because google-cloud-cpp
@@ -409,7 +409,7 @@ ExternalProject_Add(google-cloud-cpp
     -Dnlohmann_json_DIR:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/nlohmann_json/lib/cmake/nlohmann_json
     -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
     -DCrc32c_DIR:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/crc32c/lib/cmake/Crc32c
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
   DEPENDS grpc c-ares protobuf crc32c absl nlohmann-json
 )
 
@@ -431,7 +431,7 @@ ExternalProject_Add(azure-storage-cpplite
     -DCURL_INCLUDE_DIR:STRING=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/curl/include
     -DCURL_LIBRARY:STRING=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/curl/lib
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/azure-storage-cpplite
-  PATCH_COMMAND git cherry-pick --no-commit a3a9c21de3fa9932dcfceb2b6617757a511c75c3 && python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND git cherry-pick --no-commit a3a9c21de3fa9932dcfceb2b6617757a511c75c3 && python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
   DEPENDS curl
 )
 
@@ -448,7 +448,7 @@ ExternalProject_Add(cnmem
     ${_CMAKE_ARGS_VCPKG_TARGET_TRIPLET}
     -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/cnmem
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
 
 #
@@ -469,5 +469,5 @@ ExternalProject_Add(aws-sdk-cpp
     -DENABLE_TESTING:BOOL=OFF
     -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_THIRD_PARTY_INSTALL_PREFIX}/aws-sdk-cpp
-  PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
+  # PATCH_COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/install_src.py --src <SOURCE_DIR> ${INSTALL_SRC_DEST_ARG}
 )
