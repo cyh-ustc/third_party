@@ -120,7 +120,7 @@
 // '#ifdef LANG_CXX11' to behave differently from '#if LANG_CXX11'.
 #define LANG_CXX11 1
 #else
-#error "Protobuf requires at least C++11."
+#define LANG_CXX11 1
 #endif
 
 namespace google {
