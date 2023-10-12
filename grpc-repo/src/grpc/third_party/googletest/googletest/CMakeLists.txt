@@ -8,6 +8,11 @@
 # ctest.  You can select which tests to run using 'ctest -R regex'.
 # For more options, run 'ctest --help'.
 
+set(CMAKE_CXX_STANDARD 17)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdc++=17")
+
+
 # When other libraries are using a shared version of runtime libraries,
 # Google Test also has to use one.
 option(
