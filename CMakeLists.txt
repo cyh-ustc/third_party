@@ -101,7 +101,7 @@ ExternalProject_Add(curl
 #
 ExternalProject_Add(grpc-repo
   PREFIX grpc-repo
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc/grpc"
+  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc"
   EXCLUDE_FROM_ALL ON
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
