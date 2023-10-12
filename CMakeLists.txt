@@ -144,7 +144,7 @@ ExternalProject_Add(nlohmann-json
 #
 ExternalProject_Add(protobuf
   PREFIX protobuf
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc/third_party/protobuf/cmake"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/grpc-repo/src/grpc/third_party/protobuf/cmake"
   EXCLUDE_FROM_ALL ON
   DOWNLOAD_COMMAND ""
   CMAKE_CACHE_ARGS
@@ -170,7 +170,7 @@ ExternalProject_Add(protobuf
 #
 ExternalProject_Add(absl
   PREFIX absl
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc/third_party/abseil-cpp"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/grpc-repo/src/grpc/third_party/abseil-cpp"
   EXCLUDE_FROM_ALL ON
   DOWNLOAD_COMMAND ""
   CMAKE_CACHE_ARGS
@@ -189,7 +189,7 @@ ExternalProject_Add(absl
 #
 ExternalProject_Add(googletest
   PREFIX protobuf
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc/third_party/googletest"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/grpc-repo/src/grpc/third_party/googletest"
   EXCLUDE_FROM_ALL ON
   DOWNLOAD_COMMAND ""
   CMAKE_CACHE_ARGS
@@ -216,7 +216,7 @@ endif()
 #
 ExternalProject_Add(c-ares
   PREFIX c-ares
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc/third_party/cares/cares"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/grpc-repo/src/grpc/third_party/cares/cares"
   EXCLUDE_FROM_ALL ON
   DOWNLOAD_COMMAND ""
   CMAKE_CACHE_ARGS
@@ -238,7 +238,7 @@ ExternalProject_Add(c-ares
 #
 ExternalProject_Add(grpc
   PREFIX grpc
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/grpc-repo/src/grpc"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/grpc-repo/src/grpc"
   EXCLUDE_FROM_ALL ON
   DOWNLOAD_COMMAND ""
   CMAKE_CACHE_ARGS
