@@ -11,7 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 if(gRPC_PROTOBUF_PROVIDER STREQUAL "module")
   # Building the protobuf tests require gmock what is not part of a standard protobuf checkout.
   # Disable them unless they are explicitly requested from the cmake command line (when we assume
