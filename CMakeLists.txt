@@ -40,7 +40,8 @@ project(tritonthirdparty LANGUAGES C CXX)
 include(ExternalProject)
 
 if(NOT TRITON_THIRD_PARTY_INSTALL_PREFIX)
-  message(FATAL_ERROR "TRITON_THIRD_PARTY_INSTALL_PREFIX must be set")
+  set(TRITON_THIRD_PARTY_INSTALL_PREFIX  {CMAKE_CURRENT_BINARY_DIR}/third-party)
+  #message(FATAL_ERROR "TRITON_THIRD_PARTY_INSTALL_PREFIX must be set")
 endif() # TRITON_THIRD_PARTY_INSTALL_PREFIX
 
 if(NOT TRITON_THIRD_PARTY_SRC_INSTALL_PREFIX)
@@ -332,9 +333,7 @@ endif()
 #
 ExternalProject_Add(prometheus-cpp
   PREFIX prometheus-cpp
-  URL "https://github.com/jupp0r/prometheus-cpp/archive/v0.7.0.tar.gz"
-  URL_HASH SHA256=93907d937fa7eab9605cba786123d3eba4e87e3dca8ecec93ff9eae4eef8de5a
-  SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/prometheus-cpp/src/prometheus-cpp"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/prometheus/prometheus-cpp-0.7.0"
   EXCLUDE_FROM_ALL ON
   CMAKE_CACHE_ARGS
     ${_CMAKE_ARGS_CMAKE_TOOLCHAIN_FILE}
